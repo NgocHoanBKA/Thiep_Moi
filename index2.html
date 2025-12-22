@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thiệp Mời 💖</title>
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #ffe6ee, #c9184a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* STORY 9:16 */
+.story {
+  width: 390px;
+  height: 500px;
+  background: linear-gradient(180deg, #fff1f6, #ffd1dc);
+  border-radius: 28px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* LENS FLARE */
+.lens {
+  position: absolute;
+  top: 30%;
+  left: -40%;
+  width: 600px;
+  height: 120px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.8),
+    rgba(255,200,220,0.6),
+    transparent
+  );
+  filter: blur(8px);
+  animation: flare 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes flare {
+  0% { transform: translateX(-100%); opacity: 0; }
+  30% { opacity: 1; }
+  50% { transform: translateX(120%); opacity: 1; }
+  100% { opacity: 0; transform: translateX(200%); }
+}
+
+/* SCENE 3D */
+.scene {
+  width: 100%;
+  height: 100%;
+  perspective: 1600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CARD */
+.card {
+  width: 320px;
+  height: 220px;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* PANELS */
+.panel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffffff, #fff3f7);
+  border-radius: 16px;
+  top: 0;
+  backface-visibility: hidden;
+  transition: transform 1.6s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.left {
+  left: 0;
+  transform-origin: left center;
+}
+
+.right {
+  right: 0;
+  transform-origin: right center;
+}
+
+.open .left { transform: rotateY(-170deg); }
+.open .right { transform: rotateY(170deg); }
+
+/* HEART LOCK */
+.heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 56px;
+  cursor: pointer;
+  z-index: 10;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+.open .heart { display: none; }
+
+/* INSIDE */
+.inside {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* PREMIUM NOTE */
+.note {
+  width: 250px;
+  background:
+    linear-gradient(#fffbe0, #fff3a0);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow:
+    0 20px 45px rgba(0,0,0,0.35),
+    inset 0 0 0 1px rgba(0,0,0,0.08);
+  transform: rotate(-2deg);
+  opacity: 0;
+  transition: opacity 1.5s ease 0.8s;
+  font-family: 'Dancing Script', cursive;
+  animation: float 3s ease-in-out infinite;
+  position: relative;
+}
+
+/* GIẢ GHIM KẸP */
+.note::before {
+  content: "📎";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-10deg);
+  font-size: 26px;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(-2deg); }
+}
+
+.open .note { opacity: 1; }
+
+.note h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.note p {
+  margin: 6px 0;
+  font-size: 18px;
+}
+
+/* SPARKLES */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 12px white;
+  animation: sparkle 3s linear forwards;
+}
+
+@keyframes sparkle {
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to { transform: translateY(900px) scale(0); opacity: 0; }
+}
+
+/* TAP */
+.tap {
+  position: absolute;
+  bottom: 60px;
+  width: 100%;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: #8b1e3f;
+}
+</style>
+</head>
+
+<body>
+
+<div class="story">
+  <div class="lens"></div>
+
+  <div class="scene">
+    <div class="card" id="card">
+
+      <div class="panel left"></div>
+      <div class="panel right"></div>
+
+      <div class="inside">
+        <div class="note">
+          <h3 id="title"></h3>
+          <p>🗓 Thứ Ba 23/12</p>
+          <p>⏰ 20:30</p>
+          <p>📍 Ôn thi & dạo phố</p>
+          <p style="margin-top:12px;">Anh chờ em nhé 💖</p>
+        </div>
+      </div>
+
+      <div class="heart" onclick="openCard()">❤️</div>
+    </div>
+  </div>
+
+  <div class="tap">Chạm vào đây này 💗</div>
+</div>
+
+<script>
+/* CÁ NHÂN HÓA */
+const receiverName = "Trịnh Thu Hường";
+document.getElementById("title").innerText =
+  `Gửi ${receiverName} siu cấp đáng yêu và xinh đẹp 💌`;
+
+function openCard() {
+  document.getElementById("card").classList.add("open");
+  document.querySelector(".tap").style.display = "none";
+  sparkle();
+}
+
+/* SPARKLE FALL */
+function sparkle() {
+  for (let i = 0; i < 45; i++) {
+    const s = document.createElement("div");
+    s.className = "sparkle";
+    s.style.left = Math.random() * window.innerWidth + "px";
+    s.style.top = Math.random() * 200 + "px";
+    s.style.animationDuration =
+      2 + Math.random() * 2 + "s";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 3000);
+  }
+}
+</script>
+
+</body>
+</html>
